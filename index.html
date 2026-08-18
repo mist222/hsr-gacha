@@ -240,18 +240,18 @@ body{background:var(--bg-dark);color:var(--text);font-family:'Segoe UI','Microso
 .collection-header .filter-tabs{display:flex;gap:8px;flex-wrap:wrap}
 .filter-tab{padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text-dim);cursor:pointer;font-size:.85em;transition:all .3s}
 .filter-tab.active,.filter-tab:hover{background:rgba(155,109,255,.2);color:var(--text);border-color:var(--purple)}
-.collection-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:12px}
-.coll-card{aspect-ratio:3/4;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;position:relative;cursor:pointer;transition:all .3s;border:2px solid;overflow:hidden}
+.collection-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.coll-card{aspect-ratio:2/3;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 0 6px;position:relative;cursor:pointer;transition:all .3s;border:2px solid;overflow:hidden}
 .coll-card:hover{transform:scale(1.05);z-index:5}
 .coll-card.five-star{border-color:var(--gold)}
 .coll-card.four-star{border-color:var(--purple)}
 .coll-card.three-star{border-color:var(--cyan)}
 .coll-card.locked{opacity:.3;filter:grayscale(1);cursor:default}
 .coll-card.locked:hover{transform:none}
-  .coll-card .cc-avatar{font-size:1.8em;margin-bottom:4px;width:100%;aspect-ratio:3/4;max-width:80px;margin:0 auto 4px;display:flex;align-items:flex-end;justify-content:center;border-radius:8px;overflow:hidden;position:relative}
-  .coll-card .cc-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;border-radius:8px}
+.coll-card .cc-avatar{font-size:1.8em;width:100%;flex:1;margin:0 auto;min-height:0;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;position:relative}
+.coll-card .cc-avatar img{width:100%;height:100%;object-fit:contain;object-position:bottom center}
   .coll-card .cc-avatar .emoji-fallback{font-size:2.5em;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-.coll-card .cc-name{font-size:.7em;text-align:center;font-weight:600}
+.coll-card .cc-name{font-size:.7em;text-align:center;font-weight:600;padding:2px 4px;background:linear-gradient(transparent,rgba(0,0,0,.7));width:100%;line-height:1.3;position:relative;z-index:2;flex-shrink:0}
 .coll-card .cc-elem{position:absolute;top:3px;right:3px;font-size:.7em}
 .coll-card .cc-count{position:absolute;bottom:3px;right:3px;font-size:.65em;background:rgba(0,0,0,.6);padding:1px 5px;border-radius:6px;color:var(--gold)}
 .coll-card .cc-new{position:absolute;top:3px;left:3px;font-size:.55em;background:var(--red);padding:1px 5px;border-radius:4px;color:#fff;font-weight:700}
@@ -2766,7 +2766,7 @@ function renderCollection(){
 
       var card = document.createElement('div');
       card.className = 'coll-card ' + (char.rarity === 5 ? 'five-star' : 'four-star') + (!owned ? ' locked' : '');
-      card.style.background = 'linear-gradient(180deg, ' + char.color + '22, ' + char.color + '08, rgba(0,0,0,0.5))';
+      card.style.background = 'radial-gradient(ellipse at 50% 30%, ' + char.color + '33, ' + char.color + '11 60%, rgba(0,0,0,0.6))';
 
       if(owned){
         card.innerHTML = '<div class="cc-elem">' + getElemIconHTML(ELEMENTS[char.element]) + '</div><div class="cc-avatar">' + getAvatarHTML(char) + '</div><div class="cc-name">' + char.name + '</div>' + (owned.count > 1 ? '<div class="cc-count">x' + owned.count + '</div>' : '') + (owned.isNew ? '<div class="cc-new">NEW</div>' : '') + (hasCostume ? '<div class="cc-costume">' + formCount + '形态</div>' : '');
