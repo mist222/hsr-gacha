@@ -1556,9 +1556,9 @@ for(var mainId in COSTUME_GROUPS){
   });
 }
 
-// 抽到角色时，返回应该存入collection的id（变体归入父角色）
+// 抽到角色时，返回存入collection的id（同一角色不同形态独立，不合并）
 function resolveCollectId(charId){
-  return VARIANT_TO_MAIN[charId] || charId;
+  return charId;
 }
 
 // 获取互动面板当前选中的时装角色
@@ -1679,7 +1679,7 @@ const State = {
   starlight: 0,
 };
 // === 本地存档（localStorage） ===
-var SAVE_KEY = 'sr_gacha_save_v1';
+var SAVE_KEY = 'sr_gacha_save_v2';
 function saveState(){
   try{
     var data = {
@@ -3128,7 +3128,6 @@ function renderCollection(){
     // 角色图鉴
     var charList = CHARACTERS.slice().sort(function(a,b){ return b.rarity - a.rarity; });
     charList.forEach(function(char){
-      if(VARIANTS[char.id]) return;
       var owned = State.collection[char.id];
       var show = false;
       if(filter === 'all') show = true;
